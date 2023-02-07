@@ -17,6 +17,7 @@ namespace Bomberman.Creatures.Hero
         private string _currentMovementKey = DownMovementKey;
 
         private Vector2 _previousDirection;
+        private int _bombAmount = 5;
 
         protected override void FixedUpdate()
         {
@@ -52,7 +53,11 @@ namespace Bomberman.Creatures.Hero
 
         public void SpawnBomb()
         {
-            _bombSpawner.Spawn(transform.position);
+            if (_bombAmount > 0)
+            {
+                _bombSpawner.Spawn(transform.position);
+                _bombAmount--;
+            }
         }
     }
 }
