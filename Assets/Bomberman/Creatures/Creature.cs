@@ -8,14 +8,14 @@ namespace Bomberman.Creatures
         [SerializeField] private float Speed;
         
         protected Rigidbody2D Rigidbody;
-        protected Vector3 Direction;
+        protected Vector2 Direction;
 
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             var velocity = CalculateVelocity();
             Rigidbody.velocity = velocity;
@@ -23,6 +23,6 @@ namespace Bomberman.Creatures
 
         public void SetDirection(Vector2 direction) => Direction = direction;
 
-        private Vector2 CalculateVelocity() => new Vector2(Direction.x * Speed, Direction.y * Speed);
+        private Vector2 CalculateVelocity() => Direction * Speed;
     }
 }
