@@ -10,8 +10,13 @@ namespace Bomberman.Creatures.Hero
         public void OnMovement(InputAction.CallbackContext context)
         {
             var direction = context.ReadValue<Vector2>();
-            Debug.Log(direction);
             _hero.SetDirection(direction);
+        }
+
+        public void OnSpawnBomb(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                _hero.SpawnBomb();
         }
     }
 }

@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Bomberman.Components.Animations
+namespace Bomberman.Model.Data
 {
     [Serializable]
-    public class AnimationClip
+    public class AnimationClipData
     {
         [SerializeField] private string _name;
         [SerializeField] private Sprite[] _sprites;

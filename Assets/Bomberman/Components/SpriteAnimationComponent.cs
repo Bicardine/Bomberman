@@ -1,14 +1,15 @@
+using Bomberman.Model.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Bomberman.Components.Animations
+namespace Bomberman.Components
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteAnimationComponent : MonoBehaviour
     {
         [SerializeField] [Range(1, 120)] private int _frameRate = 10;
         [SerializeField] private UnityEvent<string> _onComplete;
-        [SerializeField] private AnimationClip[] _clips;
+        [SerializeField] private AnimationClipData[] _clips;
 
         private SpriteRenderer _spriteRenderer;
         private float _secondsPerFrame;

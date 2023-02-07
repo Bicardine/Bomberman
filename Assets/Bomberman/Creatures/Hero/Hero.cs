@@ -1,4 +1,5 @@
-using Bomberman.Components.Animations;
+using Bomberman.Bombs;
+using Bomberman.Components;
 using UnityEngine;
 
 namespace Bomberman.Creatures.Hero
@@ -6,6 +7,7 @@ namespace Bomberman.Creatures.Hero
     public class Hero : Creature
     {
         [SerializeField] private SpriteAnimationComponent _spriteAnimationComponent;
+        [SerializeField] private BombSpawner _bombSpawner;
 
         private static readonly string UpMovementKey = "UpMovement";
         private static readonly string DownMovementKey = "DownMovement";
@@ -46,6 +48,11 @@ namespace Bomberman.Creatures.Hero
             }
 
             _spriteAnimationComponent.SetClip(_currentMovementKey);
+        }
+
+        public void SpawnBomb()
+        {
+            _bombSpawner.Spawn(transform.position);
         }
     }
 }
