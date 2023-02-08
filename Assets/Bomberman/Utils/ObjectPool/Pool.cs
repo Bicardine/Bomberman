@@ -7,7 +7,7 @@ namespace Bomberman.Utils.ObjectPool
     {
         private Dictionary<int, Queue<PoolItem>> _items = new Dictionary<int, Queue<PoolItem>>();
 
-        private const string _defaultPoolName = "POOL";
+        private static readonly string DefaultPoolName = "POOL";
 
         private static Pool _instance;
 
@@ -17,7 +17,7 @@ namespace Bomberman.Utils.ObjectPool
             {
                 if (_instance == null)
                 {
-                    var instance = new GameObject(_defaultPoolName);
+                    var instance = new GameObject(DefaultPoolName);
                     _instance = instance.AddComponent<Pool>();
                 }
 
@@ -25,7 +25,7 @@ namespace Bomberman.Utils.ObjectPool
             }
         }
 
-        public PoolItem Get(PoolItem poolItem)
+        public T Get<T>(T poolItem) where T : PoolItem
         {
             var id = poolItem.GetInstanceID();
             var queue = RequireQueue(id);
@@ -35,7 +35,7 @@ namespace Bomberman.Utils.ObjectPool
                 var polledItem = queue.Dequeue();
                 polledItem.gameObject.SetActive(true);
                 polledItem.Restart();
-                return polledItem;
+                return (T)polledItem;
             }
 
             var instance = Instantiate(poolItem);

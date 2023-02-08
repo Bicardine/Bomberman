@@ -6,9 +6,15 @@ namespace Bomberman.Creatures
     public class Creature : MonoBehaviour
     {
         [SerializeField] private float Speed;
-        
+
         protected Rigidbody2D Rigidbody;
         protected Vector2 Direction;
+
+        private void OnValidate()
+        {
+            if (Speed < 0)
+                Speed = 0;
+        }
 
         private void Awake()
         {

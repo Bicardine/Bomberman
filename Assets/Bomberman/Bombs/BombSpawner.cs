@@ -1,5 +1,5 @@
+using Bomberman.Explosions;
 using Bomberman.Utils.ObjectPool;
-using BombermanComponents;
 using UnityEngine;
 
 namespace Bomberman.Bombs
@@ -8,8 +8,7 @@ namespace Bomberman.Bombs
     {
         [SerializeField] private Bomb _bomb;
         [SerializeField] private Transform _parent;
-
-        private static readonly string ExplosionKey = "Explosion";
+        [SerializeField] private ExplosionSpawner _explosionSpawner;
 
         public void Spawn(Vector2 position)
         {
@@ -19,9 +18,7 @@ namespace Bomberman.Bombs
             var instance = Pool.Instance.Get(_bomb);
             instance.transform.position = position;
             instance.transform.parent =_parent;
-
-            if (instance.TryGetComponent(out TimerComponent timerComponent))
-                timerComponent.SetTimer(ExplosionKey);
+            instance.Init(_explosionSpawner);
         }
     }
 }

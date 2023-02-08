@@ -50,3 +50,6 @@ TagManager:
   - name: Prop
     uniqueID: 2003284613
     locked: 0
+  - name: Explosion
+    uniqueID: 2244784325
+    locked: 0

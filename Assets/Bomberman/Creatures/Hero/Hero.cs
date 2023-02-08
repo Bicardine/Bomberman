@@ -17,7 +17,7 @@ namespace Bomberman.Creatures.Hero
         private string _currentMovementKey = DownMovementKey;
 
         private Vector2 _previousDirection;
-        private int _bombAmount = 5;
+        private int _bombAmount = 25;
 
         protected override void FixedUpdate()
         {
