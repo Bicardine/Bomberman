@@ -5,10 +5,10 @@ namespace Bomberman.Utils.ObjectPool
 {
     public class PoolItem : MonoBehaviour
     {
+        [SerializeField] private UnityEvent _onRestart;
+        
         private int _id;
         private Pool _pool;
-
-        public UnityEvent _onRestart;
 
         public void Retain(int id, Pool pool)
         {
@@ -16,7 +16,7 @@ namespace Bomberman.Utils.ObjectPool
             _pool = pool;
         }
 
-        public void Restart() => _onRestart?.Invoke();
+        public virtual void Restart() => _onRestart?.Invoke();
 
         public void Release() => _pool.Release(_id, this);
     }

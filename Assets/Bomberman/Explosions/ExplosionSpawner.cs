@@ -1,10 +1,13 @@
+using Bomberman.Components;
 using Bomberman.Components.ColliderBased;
+using Bomberman.Utils;
 using Bomberman.Utils.ObjectPool;
 using UnityEngine;
 
 namespace Bomberman.Explosions
 {
     [RequireComponent(typeof(CheckOverlapBoxComponent))]
+    [RequireComponent(typeof(DeleteTileComponent))]
     public class ExplosionSpawner : MonoBehaviour
     {
         [SerializeField] private Explosion _explosion;
@@ -13,6 +16,7 @@ namespace Bomberman.Explosions
         [SerializeField] private int _explosionLength = 2;
 
         private CheckOverlapBoxComponent _checkOverlapBoxComponent;
+        private DeleteTileComponent _deleteTileComponent;
 
         private void OnValidate()
         {
@@ -20,7 +24,11 @@ namespace Bomberman.Explosions
                 _explosionLength = 1;
         }
 
-        private void Awake() => _checkOverlapBoxComponent = GetComponent<CheckOverlapBoxComponent>();
+        private void Awake()
+        {
+            _checkOverlapBoxComponent = GetComponent<CheckOverlapBoxComponent>();
+            _deleteTileComponent = GetComponent<DeleteTileComponent>();
+        }
 
         public void Spawn(Vector2 position)
         {
@@ -30,12 +38,10 @@ namespace Bomberman.Explosions
 
         private Explosion SpawnExplosion(Vector2 position)
         {
-            position.x = Mathf.Round(position.x);
-            position.y = Mathf.Round(position.y);
-
             var instance = Pool.Instance.Get(_explosion);
-            instance.transform.position = position;
+            instance.transform.position = position.Round();
             instance.transform.parent = _parent;
+            instance.SetExplosionType(ExplosionType.Start);
 
             return instance;
         }
@@ -51,7 +57,11 @@ namespace Bomberman.Explosions
             if (length <= 0) return;
 
             position += direction;
-            if (_checkOverlapBoxComponent.Check(position)) return;
+            if (_checkOverlapBoxComponent.Check(position))
+            {
+                _deleteTileComponent.Delete(position);
+                return;
+            }
 
             var instance = SpawnExplosion(position);
             instance.SetDirection(direction);

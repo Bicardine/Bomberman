@@ -44,12 +44,9 @@ namespace Bomberman.Components
             }
         }
 
-        public void StopAnimation()
-        {
-            enabled = IsPlaying = false;
-        }
+        public void StopAnimation() => enabled = IsPlaying = false;
 
-        private void StartAnimation()
+        public void StartAnimation()
         {
             _nextFrameTime = Time.time;
             enabled = IsPlaying = true;

@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 16638519}
   - component: {fileID: 16638518}
   - component: {fileID: 16638517}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DestructiblesTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1235,6 +1235,52 @@ MonoBehaviour:
   m_DefaultActionMap: Hero
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &193526899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 193526900}
+  - component: {fileID: 193526901}
+  m_Layer: 0
+  m_Name: DestructableBrickSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &193526900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193526899}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 854495229}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &193526901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193526899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93c54c83ba781e4a86edb8b3407e00a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deleteTailComponent: {fileID: 1185414745}
+  _destructableBrick: {fileID: -4448233341575882057, guid: 1f405e0e72bfdb943b41f82014400dd2, type: 3}
+  _parent: {fileID: 193526900}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,7 +1434,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -46420179
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -7679691229697230091, guid: 1c5d30aa85a486e4b9cd3b29a8f7dc34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1491,6 +1537,7 @@ Transform:
   m_Children:
   - {fileID: 1510016725}
   - {fileID: 1185414741}
+  - {fileID: 193526900}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1504,6 +1551,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1185414741}
   - component: {fileID: 1185414742}
+  - component: {fileID: 1185414743}
+  - component: {fileID: 1185414745}
   m_Layer: 0
   m_Name: ExplosionSpawner
   m_TagString: Untagged
@@ -1544,6 +1593,39 @@ MonoBehaviour:
   - {x: 0, y: -1}
   - {x: -1, y: 0}
   - {x: 1, y: 0}
+  _explosionLength: 2
+--- !u!114 &1185414743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185414740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e3bd3db287c914bb12b65bc933fb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mask:
+    serializedVersion: 2
+    m_Bits: 64
+  _size: {x: 0.25, y: 0.25}
+--- !u!114 &1185414745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185414740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64bc57c611a7e1a4d8a3a5b1ef21c11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tileMap: {fileID: 16638519}
+  _onDeleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1510016723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,7 +1682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1940908112}
   - component: {fileID: 1940908111}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LevelGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1647,7 +1729,7 @@ GameObject:
   - component: {fileID: 2129070863}
   - component: {fileID: 2129070862}
   - component: {fileID: 2129070861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndestructiblesTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

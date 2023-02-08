@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Level
   - 
   - 
   - 
@@ -44,11 +44,11 @@ TagManager:
   - name: TileMap
     uniqueID: 3572784917
     locked: 0
-  - name: Char
-    uniqueID: 4248547117
-    locked: 0
   - name: Prop
     uniqueID: 2003284613
+    locked: 0
+  - name: Char
+    uniqueID: 4248547117
     locked: 0
   - name: Explosion
     uniqueID: 2244784325

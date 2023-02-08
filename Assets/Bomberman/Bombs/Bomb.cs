@@ -39,5 +39,12 @@ namespace Bomberman.Bombs
         {
             _explosionSpawner.Spawn(transform.position);
         }
+
+        public override void Restart()
+        {
+            base.Restart();
+            
+            _collider.isTrigger = true;
+        }
     }
 }
