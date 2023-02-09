@@ -5,7 +5,7 @@ namespace Bomberman.Creatures
     [RequireComponent(typeof(Rigidbody2D))]
     public class Creature : MonoBehaviour
     {
-        [SerializeField] private float Speed;
+        [SerializeField] protected float Speed;
 
         protected Rigidbody2D Rigidbody;
         protected Vector2 Direction;

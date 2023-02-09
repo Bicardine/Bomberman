@@ -59,5 +59,22 @@ namespace Bomberman.Creatures.Hero
                 _bombAmount--;
             }
         }
+
+        public void IncreaseSpeed(int value)
+        {
+            if (value < 0) return;
+
+            Speed += value;
+        }
+
+        public void IncreaseBlustRadius(int value)
+        {
+
+        }
+
+        public void AddExtraBomb()
+        {
+
+        }
     }
 }
