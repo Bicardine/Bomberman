@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Bomberman.Model.Definitions.Repositories.BonusItems
 {
-    [CreateAssetMenu(menuName = "Definitions/BonusItems", fileName = "BonusItems")]
+    [CreateAssetMenu(menuName = "Definitions/BonusItems", fileName = "BonusItemsRepostiory")]
     public class BonusItemsRepostiory : DefinitionRepository<BonusItemDefinition>
     {
 #if UNITY_EDITOR

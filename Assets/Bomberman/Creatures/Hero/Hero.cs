@@ -43,7 +43,6 @@ namespace Bomberman.Creatures.Hero
 
             if (direction == Vector2.zero)
             {
-                Debug.Log("Vector2 zero...");
                 _spriteAnimationComponent.StopAnimation();
                 return;
             }
@@ -72,9 +71,6 @@ namespace Bomberman.Creatures.Hero
 
         }
 
-        public void AddExtraBomb()
-        {
-
-        }
+        public void AddExtraBomb() => _bombAmount++;
     }
 }

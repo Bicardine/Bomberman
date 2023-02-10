@@ -17,9 +17,17 @@ namespace Bomberman.BonusItems
             _spriteRenderer.sprite = data.Sprite;
         }
 
-        public override void Restart()
+        private void OnTriggerEnter(Collider other)
         {
-            base.Restart();
+            Debug.Log("OnTriggerEnter...");
+            if (other.TryGetComponent(out Hero hero))
+                Use(hero);
+            Release();
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            Debug.Log("OnCollisionEnter");    
         }
 
         public void Use(Hero hero) => _usableBehaviour.Use(hero);

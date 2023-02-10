@@ -23,15 +23,9 @@ namespace Bomberman.Explosions
             _timerComponent = GetComponent<TimerComponent>();
         }
 
-        private void OnEnable()
-        {
-            _timerComponent.SetTimer(ReleaseKey);
-        }
+        private void OnEnable() => _timerComponent.SetTimer(ReleaseKey);
 
-        public void SetExplosionType(ExplosionType type)
-        {
-            _spriteAnimationComponent.SetClip(type.ToString());
-        }
+        public void SetExplosionType(ExplosionType type) => _spriteAnimationComponent.SetClip(type.ToString());
 
         public void SetDirection(Vector2 direction) => _setDirectionComponent.SetDirection(direction);
     }

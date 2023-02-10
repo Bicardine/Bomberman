@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BlastRadiusIncreaseBehaviour
   m_EditorClassIdentifier: 
   _intData:
-    _value: 0
+    _value: 1

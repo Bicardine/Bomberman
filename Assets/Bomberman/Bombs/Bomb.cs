@@ -1,3 +1,4 @@
+using System;
 using Bomberman.Creatures.Hero;
 using Bomberman.Explosions;
 using Bomberman.Utils.ObjectPool;
@@ -16,16 +17,15 @@ namespace Bomberman.Bombs
 
         private static readonly string ExplosionKey = "Explosion";
 
+        public event Action<Bomb> Activated;
+
         private void Awake()
         {
             _timerComponent = GetComponent<TimerComponent>();
             _collider = GetComponent<Collider2D>();
         }
 
-        private void OnEnable()
-        {
-            _timerComponent.SetTimer(ExplosionKey);
-        }
+        private void OnEnable() => _timerComponent.SetTimer(ExplosionKey);
 
         private void OnTriggerExit2D(Collider2D other)
         {
@@ -33,11 +33,10 @@ namespace Bomberman.Bombs
                 _collider.isTrigger = false;
         }
 
-        public void Init(ExplosionSpawner explosionSpawner) => _explosionSpawner = explosionSpawner;
-
-        public void SpawnExplosion()
+        public void Activate()
         {
-            _explosionSpawner.Spawn(transform.position);
+            Activated?.Invoke(this);
+            Release();
         }
 
         public override void Restart()

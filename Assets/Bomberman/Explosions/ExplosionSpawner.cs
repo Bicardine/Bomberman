@@ -1,3 +1,4 @@
+using Bomberman.Bombs;
 using Bomberman.Components;
 using Bomberman.Components.ColliderBased;
 using Bomberman.Utils;
@@ -10,6 +11,7 @@ namespace Bomberman.Explosions
     [RequireComponent(typeof(DeleteTileComponent))]
     public class ExplosionSpawner : MonoBehaviour
     {
+        [SerializeField] private BombSpawner _bombSpawner;
         [SerializeField] private Explosion _explosion;
         [SerializeField] private Transform _parent;
         [SerializeField] private Vector2[] _directions = {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
@@ -30,7 +32,19 @@ namespace Bomberman.Explosions
             _deleteTileComponent = GetComponent<DeleteTileComponent>();
         }
 
-        public void Spawn(Vector2 position)
+        private void OnEnable() => _bombSpawner.Spawned += OnBombSpawned;
+
+        private void OnDisable() => _bombSpawner.Spawned -= OnBombSpawned;
+
+        private void OnBombSpawned(Bomb bomb) => bomb.Activated += OnBombActivated;
+
+        private void OnBombActivated(Bomb bomb)
+        {
+            bomb.Activated -= OnBombActivated;
+            Spawn(bomb.transform.position);
+        }
+
+        private void Spawn(Vector2 position)
         {
             SpawnExplosion(position);
             SpawnWavesExplosion(position);
@@ -38,12 +52,12 @@ namespace Bomberman.Explosions
 
         private Explosion SpawnExplosion(Vector2 position)
         {
-            var instance = Pool.Instance.Get(_explosion);
-            instance.transform.position = position.Round();
-            instance.transform.parent = _parent;
-            instance.SetExplosionType(ExplosionType.Start);
+            var explosion = Pool.Instance.Get(_explosion);
+            explosion.transform.position = position.Round();
+            explosion.transform.parent = _parent;
+            explosion.SetExplosionType(ExplosionType.Start);
 
-            return instance;
+            return explosion;
         }
 
         public void SpawnWavesExplosion(Vector2 position)
@@ -63,10 +77,10 @@ namespace Bomberman.Explosions
                 return;
             }
 
-            var instance = SpawnExplosion(position);
-            instance.SetDirection(direction);
+            var explosion = SpawnExplosion(position);
+            explosion.SetDirection(direction);
             var explosionType = length > 1 ? ExplosionType.Middle : ExplosionType.End;
-            instance.SetExplosionType(explosionType);
+            explosion.SetExplosionType(explosionType);
             Explode(position, direction, length - 1);
         }
     }

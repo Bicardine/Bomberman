@@ -1,4 +1,4 @@
-using Bomberman.Explosions;
+using System;
 using Bomberman.Utils;
 using Bomberman.Utils.ObjectPool;
 using UnityEngine;
@@ -9,14 +9,15 @@ namespace Bomberman.Bombs
     {
         [SerializeField] private Bomb _bomb;
         [SerializeField] private Transform _parent;
-        [SerializeField] private ExplosionSpawner _explosionSpawner;
 
+        public event Action<Bomb> Spawned;
+        
         public void Spawn(Vector2 position)
         {
-            var instance = Pool.Instance.Get(_bomb);
-            instance.transform.position = position.Round();
-            instance.transform.parent =_parent;
-            instance.Init(_explosionSpawner);
+            var bomb = Pool.Instance.Get(_bomb);
+            bomb.transform.position = position.Round();
+            bomb.transform.parent =_parent;
+            Spawned?.Invoke(bomb);
         }
     }
 }

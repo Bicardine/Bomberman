@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86f9a4aaeac32e48a51bb3f03df7f97, type: 3}
   m_Name: DefinitionsFacade
   m_EditorClassIdentifier: 
-  _bonusItemsRepository: {fileID: 0}
+  _bonusItemsRepository: {fileID: 11400000, guid: 438ddeaee0ea1924190897d4d9857eb6, type: 2}
