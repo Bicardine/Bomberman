@@ -1,6 +1,5 @@
 using System;
 using Bomberman.Creatures.Hero;
-using Bomberman.Explosions;
 using Bomberman.Utils.ObjectPool;
 using BombermanComponents;
 using UnityEngine;
@@ -13,7 +12,9 @@ namespace Bomberman.Bombs
     {
         private Collider2D _collider;
         private TimerComponent _timerComponent;
-        private ExplosionSpawner _explosionSpawner;
+        private int _blustRadius = 1;
+
+        public int BlustRadius => _blustRadius;
 
         private static readonly string ExplosionKey = "Explosion";
 
@@ -33,6 +34,8 @@ namespace Bomberman.Bombs
                 _collider.isTrigger = false;
         }
 
+        public void Init(int blustRadius) => _blustRadius = blustRadius;
+
         public void Activate()
         {
             Activated?.Invoke(this);
@@ -42,7 +45,7 @@ namespace Bomberman.Bombs
         public override void Restart()
         {
             base.Restart();
-            
+
             _collider.isTrigger = true;
         }
     }

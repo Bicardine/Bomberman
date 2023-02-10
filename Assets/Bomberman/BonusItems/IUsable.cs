@@ -1,4 +1,3 @@
-using System;
 using Bomberman.Creatures.Hero;
 
 namespace Bomberman.BonusItems

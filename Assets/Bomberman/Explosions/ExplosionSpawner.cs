@@ -15,16 +15,9 @@ namespace Bomberman.Explosions
         [SerializeField] private Explosion _explosion;
         [SerializeField] private Transform _parent;
         [SerializeField] private Vector2[] _directions = {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
-        [SerializeField] private int _explosionLength = 2;
 
         private CheckOverlapBoxComponent _checkOverlapBoxComponent;
         private DeleteTileComponent _deleteTileComponent;
-
-        private void OnValidate()
-        {
-            if (_explosionLength < 1)
-                _explosionLength = 1;
-        }
 
         private void Awake()
         {
@@ -41,13 +34,14 @@ namespace Bomberman.Explosions
         private void OnBombActivated(Bomb bomb)
         {
             bomb.Activated -= OnBombActivated;
-            Spawn(bomb.transform.position);
+            Spawn(bomb.transform.position, bomb.BlustRadius);
         }
 
-        private void Spawn(Vector2 position)
+        private void Spawn(Vector2 position, int blustRadius)
         {
+            position = position.Round();
             SpawnExplosion(position);
-            SpawnWavesExplosion(position);
+            SpawnWavesExplosion(position, blustRadius);
         }
 
         private Explosion SpawnExplosion(Vector2 position)
@@ -60,10 +54,10 @@ namespace Bomberman.Explosions
             return explosion;
         }
 
-        public void SpawnWavesExplosion(Vector2 position)
+        public void SpawnWavesExplosion(Vector2 position, int blustRadius)
         {
             foreach (var direction in _directions)
-                Explode(position, direction, _explosionLength);
+                Explode(position, direction, blustRadius);
         }
 
         private void Explode(Vector2 position, Vector2 direction, int length)

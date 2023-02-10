@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Bomberman.BonusItems.Behaviours
 {
-    [CreateAssetMenu(menuName = "Behaviours/SpeedIncrease", fileName = "SpeedIncreaseBehaviour")]
+    [CreateAssetMenu(menuName = "Behaviours/IncreaseSpeed", fileName = "IncreaseSpeedBehaviour")]
     [Serializable]
-    public class SpeedIncreaseBehaviour : UsableBehaviour
+    public class IncreaseSpeedBehaviour : UsableBehaviour
     {
         [SerializeField] private PositiveIntData _intData;
 

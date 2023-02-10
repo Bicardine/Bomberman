@@ -16,7 +16,7 @@ namespace Bomberman.Creatures.Hero
         public void OnSpawnBomb(InputAction.CallbackContext context)
         {
             if (context.started)
-                _hero.SpawnBomb();
+                _hero.TrySpawnBomb();
         }
     }
 }

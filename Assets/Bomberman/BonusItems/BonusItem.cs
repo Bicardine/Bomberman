@@ -11,23 +11,21 @@ namespace Bomberman.BonusItems
 
         private IUsable _usableBehaviour;
 
+        public IUsable UsableBehaviour => _usableBehaviour;
+
         public void Render(BonusItemData data)
         {
             _usableBehaviour = data.UsableBehaviour;
             _spriteRenderer.sprite = data.Sprite;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("OnTriggerEnter...");
             if (other.TryGetComponent(out Hero hero))
+            {
                 Use(hero);
-            Release();
-        }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            Debug.Log("OnCollisionEnter");    
+                Release();
+            }
         }
 
         public void Use(Hero hero) => _usableBehaviour.Use(hero);

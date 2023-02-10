@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c0768983655a749b2ce413c7c7762e, type: 3}
-  m_Name: SpeedIncreaseBehaviour
+  m_Script: {fileID: 11500000, guid: 0cc39da46ecbb1844a32ca271d280128, type: 3}
+  m_Name: IncreaseBombAmountBehaviour
   m_EditorClassIdentifier: 
   _intData:
-    _value: 1
+    _value: 0

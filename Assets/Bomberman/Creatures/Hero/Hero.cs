@@ -17,7 +17,8 @@ namespace Bomberman.Creatures.Hero
         private string _currentMovementKey = DownMovementKey;
 
         private Vector2 _previousDirection;
-        private int _bombAmount = 25;
+        private int _bombAmount = 1;
+        private int _blustRadius = 1;
 
         protected override void FixedUpdate()
         {
@@ -50,27 +51,42 @@ namespace Bomberman.Creatures.Hero
             _spriteAnimationComponent.SetClip(_currentMovementKey);
         }
 
-        public void SpawnBomb()
+        public void TrySpawnBomb()
         {
             if (_bombAmount > 0)
             {
-                _bombSpawner.Spawn(transform.position);
+                var bomb = _bombSpawner.Spawn(transform.position, _blustRadius);
                 _bombAmount--;
+
+                bomb.Activated += OnBombActivated;
             }
         }
 
-        public void IncreaseSpeed(int value)
+        private void OnBombActivated(Bomb bomb)
         {
-            if (value < 0) return;
+            bomb.Activated -= OnBombActivated;
+            _bombAmount++;
+        }
+
+        public void IncreaseSpeed(int value = 1)
+        {
+            if (value <= 0) return;
 
             Speed += value;
         }
 
-        public void IncreaseBlustRadius(int value)
+        public void IncreaseBlustRadius(int value = 1)
         {
+            if (value <= 0) return;
 
+            _blustRadius += value;
         }
 
-        public void AddExtraBomb() => _bombAmount++;
+        public void IncreaseBombAmount(int value = 1)
+        {
+            if (value <= 0) return;
+
+            _bombAmount += value;
+        }
     }
 }

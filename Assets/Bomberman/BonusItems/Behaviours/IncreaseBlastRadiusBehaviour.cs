@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Bomberman.BonusItems.Behaviours
 {
-    [CreateAssetMenu(menuName = "Behaviours/BlastRadiusIncrease", fileName = "BlastRadiusIncreaseBehaviour")]
+    [CreateAssetMenu(menuName = "Behaviours/IncreaseBlastRadius", fileName = "IncreaseBlastRadiusBehaviour")]
     [Serializable]
-    public class BlastRadiusIncreaseBehaviour : UsableBehaviour
+    public class IncreaseBlastRadiusBehaviour : UsableBehaviour
     {
         [SerializeField] private PositiveIntData _intData;
 

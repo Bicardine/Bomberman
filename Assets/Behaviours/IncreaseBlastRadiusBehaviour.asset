@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39717e08070e852439376eea6ee08ecd, type: 3}
-  m_Name: BlastRadiusIncreaseBehaviour
+  m_Script: {fileID: 11500000, guid: 222440aee766c384a9f79992c497bf11, type: 3}
+  m_Name: IncreaseBlastRadiusBehaviour
   m_EditorClassIdentifier: 
   _intData:
-    _value: 1
+    _value: 0
